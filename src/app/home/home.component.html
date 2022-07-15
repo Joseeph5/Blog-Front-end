@@ -1,0 +1,53 @@
+<div class="blog-center">
+  <div class="blog-search">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="basic-addon2"
+        [(ngModel)]="searchTerm"
+      />
+      <div class="input-group-append">
+        <button class="input-group-text" id="basic-addon2" (click)="onSearch()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!blogList.length">
+    <h4>No Blogs found</h4>
+  </div>
+  <div class="blog-grid">
+    <section *ngFor="let blog of blogList">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <p class="card-subtitle mb-2 text-muted">{{ blog.author }}</p>
+          <p class="card-text">
+            {{ blog.content | slice: 0:100 }}
+          </p>
+          <button
+            routerLink="/blog/details/{{ blog._id }}"
+            class="btn btn-primary"
+          >
+            continue reading
+          </button>
+        </div>
+        <div class="card-body">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onUpVote(blog)"
+          >
+            {{ blog?.upvote }} Upvote
+          </button>
+          <button class="btn btn-danger" (click)="onDownVote(blog)">
+            {{ blog.downvote }} Downvote
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

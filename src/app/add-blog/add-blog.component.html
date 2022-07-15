@@ -1,0 +1,66 @@
+<div class="blog-center section">
+  <form [formGroup]="addBlogForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Title</label>
+      <input
+        formControlName="title"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+      />
+      <span
+        *ngIf="
+          (!addBlogForm.get('title')?.valid &&
+            addBlogForm.get('title')?.touched) ||
+          (requireMsg && !addBlogForm.get('title')?.valid)
+        "
+        class="text-danger"
+        >Title is required</span
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Author</label>
+      <input
+        formControlName="author"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput2"
+      />
+      <span
+        *ngIf="
+          (!addBlogForm.get('author')?.valid &&
+            addBlogForm.get('author')?.touched) ||
+          (requireMsg && !addBlogForm.get('author')?.valid)
+        "
+        class="text-danger"
+        >Author is required</span
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Content</label>
+      <textarea
+        formControlName="content"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+      ></textarea>
+      <span
+        *ngIf="
+          (!addBlogForm.get('content')?.valid &&
+            addBlogForm.get('content')?.touched) ||
+          (requireMsg && !addBlogForm.get('content')?.valid)
+        "
+        class="text-danger"
+        >Content is required</span
+      >
+    </div>
+    <br />
+    <div class="form-group">
+      <button type="submit" class="btn btn-success form-control">
+        Add blog
+      </button>
+    </div>
+  </form>
+</div>

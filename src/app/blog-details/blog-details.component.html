@@ -1,0 +1,115 @@
+<div class="blog-center section">
+  <section class="container">
+    <div class="mb-3 p-4">
+      <h1 class="text-center">{{ blog?.title }}</h1>
+    </div>
+    <div class="mb-3 pt-4 d-flex justify-content-between align-items-center">
+      <div>
+        <span style="margin-right: 0.125rem">By</span>
+        <h5 style="display: inline-block">{{ blog?.author }}</h5>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="open(content)">
+          Update
+        </button>
+        <button type="button" class="btn btn-danger" (click)="delete(blog._id)">
+          Delete
+        </button>
+      </div>
+    </div>
+    <div class="mb-3 pt-4">
+      <p>
+        {{ blog?.content }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-success" (click)="onUpVote(blog)">
+        {{ blog?.upvote }} Upvote
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onDownVote(blog)">
+        {{ blog?.downvote }}Downvote
+      </button>
+    </div>
+  </section>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Blog</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addBlogForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input
+          formControlName="title"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          [(ngModel)]="blog.title"
+        />
+        <span
+          *ngIf="
+            (!addBlogForm.get('title')?.valid &&
+              addBlogForm.get('title')?.touched) ||
+            (requireMsg && !addBlogForm.get('title')?.valid)
+          "
+          class="text-danger"
+          >Title is required</span
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Author</label>
+        <input
+          formControlName="author"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput2"
+          [(ngModel)]="blog.author"
+        />
+        <span
+          *ngIf="
+            (!addBlogForm.get('author')?.valid &&
+              addBlogForm.get('author')?.touched) ||
+            (requireMsg && !addBlogForm.get('author')?.valid)
+          "
+          class="text-danger"
+          >Author is required</span
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Content</label>
+        <textarea
+          formControlName="content"
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          [(ngModel)]="blog.content"
+        ></textarea>
+        <span
+          *ngIf="
+            (!addBlogForm.get('content')?.valid &&
+              addBlogForm.get('content')?.touched) ||
+            (requireMsg && !addBlogForm.get('content')?.valid)
+          "
+          class="text-danger"
+          >Content is required</span
+        >
+      </div>
+      <br />
+      <div class="form-group">
+        <button type="submit" class="btn btn-success form-control">
+          Update Blog
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

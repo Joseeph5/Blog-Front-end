@@ -1,0 +1,35 @@
+.blog-center {
+  width: 85vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: grid;
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
+.blog-grid {
+  width: 85vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: grid;
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
+.blog-search {
+  width: 65vw;
+  margin: 2rem auto;
+
+  max-width: 771px;
+  display: grid;
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
+
+.section {
+  padding: 3rem 0;
+}
+
+@media screen and (min-width: 576px) {
+  .blog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(338.8px, 1fr));
+  }
+}
